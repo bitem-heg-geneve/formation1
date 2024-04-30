@@ -55,13 +55,11 @@ def collections():
     return jsonify(result)
 
 
-@app.route('/facets/<field>')
-def aggregate(field):
+@app.route('/facets/<collection>/<field>')
+def aggregate(collection, field):
     # retreive the query parameters from the URL
     offset = int(request.args.get("offset", 0))
     limit = int(request.args.get("limit", 10))
-    # hardcoded
-    collection = "med24"
     # search the values on ES
     values = search_field_values(collection, field)
     # truncated the values so Firefox display the results quickly
