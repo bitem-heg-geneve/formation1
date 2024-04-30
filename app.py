@@ -75,6 +75,25 @@ def aggregate(field):
     })
 
 
+@app.route('/facets/all/<field>')
+def aggregate_all(field):
+    # retreive the query parameters from the URL
+    offset = int(request.args.get("offset", 0))
+    limit = int(request.args.get("limit", 10))
+    # hardcoded
+    collection = "med24"
+    # search the values on ES
+    values = search_field_values(collection, field)
+    # truncated the values so Firefox display the results quickly
+    truncated_values = values[offset:offset+limit]
+    # return the values
+    return jsonify({
+        "offset": offset,
+        "limit": limit,
+        "size": len(values),
+        "values": truncated_values,
+    })
+
 def search_field_values(collection, field):
     """Fetch from ElasticSearch all the values for a field.
     Return something like this:
