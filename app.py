@@ -36,6 +36,7 @@ Return the collections per SIBiLS versions
 
 @app.route("/collections")
 def collections():
+    print ("Tutu")
     # get all ES indexes
     indices = ES.indices.get_alias(index="*")
     # keep only the index names
