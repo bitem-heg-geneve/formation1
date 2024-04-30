@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return """<h1>Welcome to this app</h1>
+    return """<h1>Bienvenue dans l'app</h1>
 
 <h2>Entry point /facets/&lt;field&gt;</h2>
 
